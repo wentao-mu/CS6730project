@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cristiano Ronaldo | UEFA Profile</title>
+    <meta name="description" content="Cristiano Ronaldo profile page for the UEFA greatest debate project." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Work+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="profile-page profile-page--ronaldo" id="top">
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="brand" href="index.html">
+          <span class="brand__mark">UEFA</span>
+          <span class="brand__title">Greatest Debate</span>
+        </a>
+        <nav class="site-nav" aria-label="Key metrics">
+          <a href="goals.html">Goals</a>
+          <a href="assists.html">Assists</a>
+          <a href="trophies.html">Titles Won</a>
+          <a href="knockout.html">Knockout G+A</a>
+          <a href="appearances.html">Appearances</a>
+          <a href="bestxi.html">UEFA Best XI</a>
+        </nav>
+        <div class="header-controls">
+          <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
+        </div>
+      </div>
+      <div class="site-header__bottom" aria-label="Star cards">
+        <a class="star-card" href="ronaldo.html" aria-label="Cristiano Ronaldo">
+          <div class="star-card__jersey star-card__jersey--real">
+            <span class="star-card__name">Ronaldo</span>
+            <span class="star-card__number">7</span>
+          </div>
+        </a>
+        <a class="star-card" href="messi.html" aria-label="Lionel Messi">
+          <div class="star-card__jersey star-card__jersey--barca">
+            <span class="star-card__name">Messi</span>
+            <span class="star-card__number">10</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro page-intro--player">
+        <div class="player-hero__text">
+          <h1>Cristiano Ronaldo</h1>
+          <h2 class="cr7-ucl-title">UEFA Champions League Records (UEFA, updated 14 Oct 2025)</h2>
+          <ul class="cr7-ucl-records">
+            <li>Most UEFA Champions League goals: 140</li>
+            <li>Most goals in a single UEFA Champions League season: 17 (2013/14)</li>
+            <li>Most UEFA Champions League knockout goals: 67</li>
+            <li>Most UEFA Champions League top-scorer seasons: 7</li>
+            <li>Most UEFA Champions League appearances: 183</li>
+            <li>Most UEFA Champions League title wins: 5</li>
+            <li>Only player to score in three different UEFA Champions League finals (2008, 2014, 2017)</li>
+            <li>One of only two players to score in all six group-stage games (2017/18)</li>
+            <li>Only player to score in 11 straight UEFA Champions League matches (2017/18)</li>
+          </ul>
+        </div>
+        <figure class="player-hero__photo">
+          <img src="assets/media/1.jpg" alt="Cristiano Ronaldo portrait" />
+        </figure>
+      </section>
+
+      <section class="cr7-chart" data-cr7-chart>
+        <div class="cr7-chart__top">
+          <h2>CR7 UCL Season Chart (2003-2025)</h2>
+          <label class="cr7-chart__control" for="cr7-metric-select">
+            Metric
+            <select id="cr7-metric-select" data-cr7-metric>
+              <option value="goals">Goals</option>
+              <option value="assists">Assists</option>
+              <option value="pass_accuracy_pct">Pass Accuracy %</option>
+              <option value="shot_creating_passes">Shot-Creating Passes</option>
+              <option value="big_chances_created">Big Chances Created</option>
+            </select>
+          </label>
+        </div>
+        <div class="cr7-chart__layout">
+          <div class="cr7-chart__main">
+            <p class="cr7-chart__subtitle">
+              <span data-cr7-metric-label>Goals</span> per season. Bar color = club color.
+            </p>
+
+            <div class="cr7-team-legend">
+              <span class="cr7-team-legend__item">
+                <span class="cr7-team-legend__swatch cr7-team-legend__swatch--mu"></span>
+                <img src="assets/logos/manchester-united.svg" alt="Manchester United crest" />
+                Manchester United
+              </span>
+              <span class="cr7-team-legend__item">
+                <span class="cr7-team-legend__swatch cr7-team-legend__swatch--rm"></span>
+                <img src="assets/logos/real-madrid.svg" alt="Real Madrid crest" />
+                Real Madrid
+              </span>
+              <span class="cr7-team-legend__item">
+                <span class="cr7-team-legend__swatch cr7-team-legend__swatch--juve"></span>
+                <img src="assets/logos/juventus.svg" alt="Juventus crest" />
+                Juventus FC
+              </span>
+            </div>
+
+            <div class="cr7-chart-scroll">
+              <div class="cr7-chart-canvas" data-cr7-svg-host aria-label="Ronaldo seasonal chart"></div>
+            </div>
+          </div>
+
+          <aside class="cr7-star-panel">
+            <h3>CR7 Star Profile</h3>
+            <p>Normalized across six UCL metrics. Blue profile is compared against other seasons.</p>
+            <div class="cr7-star-controls">
+              <label class="cr7-star-controls__field" for="cr7-club-select">
+                Club
+                <select id="cr7-club-select" data-cr7-club></select>
+              </label>
+              <label class="cr7-star-controls__field" for="cr7-season-select">
+                Season
+                <select id="cr7-season-select" data-cr7-season></select>
+              </label>
+            </div>
+            <p class="cr7-star-summary" data-cr7-radar-summary>
+              Comparing selected profile with other seasons in the current scope.
+            </p>
+            <div class="cr7-star-legend">
+              <span class="cr7-star-legend__item">
+                <span class="cr7-star-legend__swatch cr7-star-legend__swatch--focus"></span>
+                Selected profile
+              </span>
+              <span class="cr7-star-legend__item">
+                <span class="cr7-star-legend__swatch cr7-star-legend__swatch--base"></span>
+                Other seasons baseline
+              </span>
+            </div>
+            <div class="cr7-star-canvas" data-cr7-radar-host aria-label="CR7 star chart"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="stage-distribution" data-cr7-stage-charts>
+        <div class="stage-distribution__top">
+          <h2>Stage Distribution by Season</h2>
+          <label class="stage-distribution__control" for="cr7-stage-metric-select">
+            Stage Metric
+            <select id="cr7-stage-metric-select" data-cr7-stage-metric>
+              <option value="goals">Goals</option>
+              <option value="assists">Assists</option>
+              <option value="pass_accuracy_pct">Pass Accuracy %</option>
+              <option value="shot_creating_passes">Shot-Creating Passes</option>
+              <option value="big_chances_created">Big Chances Created</option>
+            </select>
+          </label>
+        </div>
+        <p class="stage-distribution__subtitle">
+          <span data-cr7-stage-metric-label>Goals</span> per season in each UEFA Champions League stage.
+        </p>
+        <div class="stage-distribution__grid">
+          <article class="stage-card">
+            <h3>Group Stage</h3>
+            <div class="stage-card__chart" data-stage-chart="group_stage"></div>
+          </article>
+          <article class="stage-card">
+            <h3>Round of 16</h3>
+            <div class="stage-card__chart" data-stage-chart="round_of_16"></div>
+          </article>
+          <article class="stage-card">
+            <h3>Quarter-finals</h3>
+            <div class="stage-card__chart" data-stage-chart="quarter_finals"></div>
+          </article>
+          <article class="stage-card">
+            <h3>Semi-finals</h3>
+            <div class="stage-card__chart" data-stage-chart="semi_finals"></div>
+          </article>
+          <article class="stage-card">
+            <h3>Final</h3>
+            <div class="stage-card__chart" data-stage-chart="final"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="profile-video">
+        <video
+          class="profile-video__media"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="assets/media/uefa.mp4" type="video/mp4" />
+        </video>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Made for debate nights, watch parties, and anyone who loves UEFA nights.</p>
+      <a class="cta cta--ghost" href="#top">Back to Top</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="assets/js/ronaldo-chart.js"></script>
+    <script src="assets/js/i18n.js"></script>
+  </body>
+</html>

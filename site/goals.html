@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Goals | Best UEFA Player</title>
+    <meta name="description" content="Evaluate the greatest UEFA player through the lens of goals and finishing impact." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Work+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="profile-page" id="top">
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="brand" href="index.html">
+          <span class="brand__mark">UEFA</span>
+          <span class="brand__title">Greatest Debate</span>
+        </a>
+        <nav class="site-nav" aria-label="Key metrics">
+          <a href="goals.html" aria-current="page">Goals</a>
+          <a href="assists.html">Assists</a>
+          <a href="trophies.html">Titles Won</a>
+          <a href="knockout.html">Knockout G+A</a>
+          <a href="appearances.html">Appearances</a>
+          <a href="bestxi.html">UEFA Best XI</a>
+        </nav>
+        <div class="header-controls">
+          <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
+        </div>
+      </div>
+      <div class="site-header__bottom" aria-label="Star cards">
+        <a class="star-card" href="ronaldo.html" aria-label="Cristiano Ronaldo">
+          <div class="star-card__jersey star-card__jersey--real">
+            <span class="star-card__name">Ronaldo</span>
+            <span class="star-card__number">7</span>
+          </div>
+        </a>
+        <a class="star-card" href="messi.html" aria-label="Lionel Messi">
+          <div class="star-card__jersey star-card__jersey--barca">
+            <span class="star-card__name">Messi</span>
+            <span class="star-card__number">10</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <p class="hero__eyebrow">Goals</p>
+        <h1>Champions League Top Goalscorers</h1>
+        <p class="hero__lead">
+          Official UEFA all-time ranking snapshot for top scorers in the UEFA Champions League.
+        </p>
+      </section>
+
+      <section class="goals-leader-cards">
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">#1</span>
+          <h3>Cristiano Ronaldo</h3>
+          <strong>140 goals</strong>
+        </article>
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">#2</span>
+          <h3>Messi</h3>
+          <strong>129 goals</strong>
+        </article>
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">#3</span>
+          <h3>Lewandowski</h3>
+          <strong>105 goals</strong>
+        </article>
+      </section>
+
+      <section class="goals-ranking">
+        <div class="section-header">
+          <h2>Top Scorers Ranking</h2>
+          <p>Switch between Top 10 and Top 20 all-time goalscorers.</p>
+        </div>
+        <div class="goals-ranking__controls" role="tablist" aria-label="Goals ranking size">
+          <button
+            class="goals-filter-btn is-active"
+            type="button"
+            data-goals-limit="10"
+            aria-pressed="true"
+          >
+            Top 10
+          </button>
+          <button class="goals-filter-btn" type="button" data-goals-limit="20" aria-pressed="false">
+            Top 20
+          </button>
+        </div>
+        <p class="goals-ranking__hint" data-goals-summary>Showing top 10 players (all-time goals).</p>
+        <div class="goals-table-wrap">
+          <table class="goals-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Goals</th>
+                <th>Distribution</th>
+              </tr>
+            </thead>
+            <tbody data-goals-table-body></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Made for debate nights, watch parties, and anyone who loves UEFA nights.</p>
+      <a class="cta cta--ghost" href="#top">Back to Top</a>
+    </footer>
+      <script src="assets/js/goals.js"></script>
+      <script src="assets/js/i18n.js"></script>
+  </body>
+</html>

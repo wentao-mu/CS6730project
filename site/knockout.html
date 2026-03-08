@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Knockout G+A | Best UEFA Player</title>
+    <meta name="description" content="Focus on knockout-stage goals and assists to judge UEFA greatness." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Work+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="profile-page" id="top">
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="brand" href="index.html">
+          <span class="brand__mark">UEFA</span>
+          <span class="brand__title">Greatest Debate</span>
+        </a>
+        <nav class="site-nav" aria-label="Key metrics">
+          <a href="goals.html">Goals</a>
+          <a href="assists.html">Assists</a>
+          <a href="trophies.html">Titles Won</a>
+          <a href="knockout.html" aria-current="page">Knockout G+A</a>
+          <a href="appearances.html">Appearances</a>
+          <a href="bestxi.html">UEFA Best XI</a>
+        </nav>
+        <div class="header-controls">
+          <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
+        </div>
+      </div>
+      <div class="site-header__bottom" aria-label="Star cards">
+        <a class="star-card" href="ronaldo.html" aria-label="Cristiano Ronaldo">
+          <div class="star-card__jersey star-card__jersey--real">
+            <span class="star-card__name">Ronaldo</span>
+            <span class="star-card__number">7</span>
+          </div>
+        </a>
+        <a class="star-card" href="messi.html" aria-label="Lionel Messi">
+          <div class="star-card__jersey star-card__jersey--barca">
+            <span class="star-card__name">Messi</span>
+            <span class="star-card__number">10</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <p class="hero__eyebrow">Knockout G+A</p>
+        <h1>Knockout Stage Head-to-Head</h1>
+        <p class="hero__lead">
+          Dataset-based comparison (2003-2025): Ronaldo vs Messi in Round of 16, Quarter-finals,
+          Semi-finals and Finals.
+        </p>
+      </section>
+
+      <section class="goals-leader-cards">
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">Ronaldo</span>
+          <h3>Total Knockout G+A</h3>
+          <strong>82</strong>
+        </article>
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">Messi</span>
+          <h3>Total Knockout G+A</h3>
+          <strong>61</strong>
+        </article>
+        <article class="goals-leader-card">
+          <span class="goals-leader-card__rank">Gap</span>
+          <h3>Knockout Difference</h3>
+          <strong>+21 (Ronaldo)</strong>
+        </article>
+      </section>
+
+      <section class="goals-ranking">
+        <div class="section-header">
+          <h2>Stage Breakdown (Goals + Assists)</h2>
+          <p>Totals from local season-stage datasets used in this project.</p>
+        </div>
+        <div class="goals-table-wrap">
+          <table class="goals-table">
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Ronaldo</th>
+                <th>Messi</th>
+                <th>Edge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Round of 16</td>
+                <td>34</td>
+                <td>35</td>
+                <td>Messi +1</td>
+              </tr>
+              <tr>
+                <td>Quarter-finals</td>
+                <td>28</td>
+                <td>15</td>
+                <td>Ronaldo +13</td>
+              </tr>
+              <tr>
+                <td>Semi-finals</td>
+                <td>15</td>
+                <td>9</td>
+                <td>Ronaldo +6</td>
+              </tr>
+              <tr>
+                <td>Final</td>
+                <td>5</td>
+                <td>2</td>
+                <td>Ronaldo +3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="goals-ranking">
+        <div class="section-header">
+          <h2>Knockout Split by Metric</h2>
+          <p>Separate totals to support your own argument, not a fixed verdict.</p>
+        </div>
+        <div class="goals-table-wrap">
+          <table class="goals-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Ronaldo</th>
+                <th>Messi</th>
+                <th>Edge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Knockout goals</td>
+                <td>67</td>
+                <td>49</td>
+                <td>Ronaldo +18</td>
+              </tr>
+              <tr>
+                <td>Knockout assists</td>
+                <td>15</td>
+                <td>12</td>
+                <td>Ronaldo +3</td>
+              </tr>
+              <tr>
+                <td>Knockout G+A</td>
+                <td>82</td>
+                <td>61</td>
+                <td>Ronaldo +21</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Made for debate nights, watch parties, and anyone who loves UEFA nights.</p>
+      <a class="cta cta--ghost" href="#top">Back to Top</a>
+    </footer>
+      <script src="assets/js/i18n.js"></script>
+  </body>
+</html>
