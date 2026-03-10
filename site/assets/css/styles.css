@@ -72,12 +72,13 @@ main,
   left: 0;
   right: 0;
   z-index: 10;
+  font-family: var(--body-font);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
   justify-content: space-between;
   padding: 20px 6vw 8px;
-  gap: 16px;
+  gap: 14px;
   background: linear-gradient(90deg, #0d35ff 0%, #092a9c 55%, #071a6a 100%);
   box-shadow: none;
 }
@@ -94,7 +95,7 @@ main,
 }
 
 .brand__mark {
-  font-family: var(--display-font);
+  font-family: var(--body-font);
   font-weight: 700;
   letter-spacing: 0.22em;
   font-size: 16px;
@@ -114,9 +115,10 @@ main,
   gap: 0;
   flex-wrap: wrap;
   row-gap: 6px;
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.85);
   z-index: 1;
 }
@@ -129,7 +131,7 @@ main,
   min-width: 0;
   position: relative;
   z-index: 3;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .header-controls {
@@ -170,7 +172,7 @@ main,
 .site-header__bottom {
   display: flex;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 10px;
   position: relative;
   z-index: 2;
   align-self: start;
@@ -1526,6 +1528,263 @@ main {
   color: var(--muted);
 }
 
+/* Apple-like homepage refresh */
+.home-page {
+  --apple-bg: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --apple-muted: #6e6e73;
+  --apple-border: #d2d2d7;
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  background: var(--apple-bg);
+  color: var(--apple-text);
+}
+
+.home-page .site-header {
+  background: linear-gradient(90deg, #0d35ff 0%, #092a9c 55%, #071a6a 100%);
+  border-bottom: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  gap: 14px;
+}
+
+.home-page .brand__mark,
+.home-page .brand__title,
+.home-page .site-nav,
+.home-page .site-nav a,
+.home-page .lang-toggle {
+  color: #ffffff;
+}
+
+.home-page .brand__title {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.home-page .site-nav a + a {
+  border-left-color: rgba(255, 255, 255, 0.35);
+}
+
+.home-page .site-nav a[aria-current="page"],
+.home-page .site-nav a:hover {
+  color: var(--apple-blue);
+}
+
+.home-page .site-nav a::after {
+  background: var(--apple-blue);
+}
+
+.home-page .lang-toggle {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.home-page .star-card__jersey {
+  min-width: 112px;
+  border-radius: 12px;
+  border: 1px solid var(--apple-border);
+  box-shadow: none;
+}
+
+.home-page main {
+  padding: calc(var(--header-height) + 32px) 7vw 92px;
+  gap: 76px;
+}
+
+.home-page .hero {
+  grid-template-columns: minmax(360px, 1.05fr) minmax(300px, 0.95fr);
+  gap: 48px;
+  padding-top: 18px;
+  align-items: start;
+}
+
+.home-page .hero h1 {
+  font-family: var(--body-font);
+  font-size: clamp(3.2rem, 8vw, 6.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--apple-text);
+  animation: none;
+}
+
+.home-page .hero__eyebrow {
+  color: var(--apple-blue);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.home-page .hero .hero__lead {
+  margin: 18px 0 28px;
+  color: var(--apple-muted);
+  font-size: 1.15rem;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.home-page .hero__stats {
+  border-top: 1px solid #e4e4e8;
+  padding-top: 22px;
+  gap: 20px;
+}
+
+.home-page .stat__value {
+  font-family: var(--body-font);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.home-page .stat__label {
+  color: var(--apple-muted);
+}
+
+.home-page .panel {
+  background: #ffffff;
+  border: 1px solid #e4e4e8;
+  border-radius: 26px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.07);
+  min-height: 0;
+}
+
+.home-page .panel::before {
+  display: none;
+}
+
+.home-page .panel__title {
+  color: var(--apple-text);
+}
+
+.home-page .panel__list li {
+  color: #333336;
+}
+
+.home-page .panel__list li::before {
+  color: #ff9f0a;
+}
+
+.home-page .panel__footer {
+  color: var(--apple-muted);
+}
+
+.home-page .panel__dot {
+  box-shadow: none;
+}
+
+.home-page .section-header h2 {
+  color: #1d1d1f;
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  letter-spacing: -0.02em;
+}
+
+.home-page .section-header p {
+  color: var(--apple-muted);
+}
+
+.home-page .cta {
+  background: var(--apple-blue);
+  color: #ffffff;
+  box-shadow: none;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.home-page .cta:hover {
+  background: var(--apple-blue-hover);
+  transform: none;
+  box-shadow: none;
+}
+
+.home-page .cta--outline {
+  background: #ffffff;
+  border-color: #b8d8ff;
+  color: var(--apple-blue);
+}
+
+.home-page .criteria__grid article,
+.home-page .compare-card,
+.home-page .candidate,
+.home-page .timeline__item,
+.home-page .score {
+  background: #ffffff;
+  border: 1px solid #e4e4e8;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+}
+
+.home-page .criteria__grid h3,
+.home-page .compare-card h3,
+.home-page .candidate h3 {
+  color: var(--apple-text);
+}
+
+.home-page .criteria__grid p,
+.home-page .compare-card p,
+.home-page .candidate p,
+.home-page .candidate__meta,
+.home-page .timeline__item p,
+.home-page .score__labels,
+.home-page .score__note,
+.home-page .vote__content p,
+.home-page .vote__feedback {
+  color: var(--apple-muted);
+}
+
+.home-page .compare-bar {
+  background: #ececf1;
+}
+
+.home-page .compare-bar-row__label {
+  color: #1f1f21;
+}
+
+.home-page .compare-bar-row__value {
+  color: #55565a;
+}
+
+.home-page .compare-legend__item {
+  color: #24262b;
+}
+
+.home-page .candidate__badge {
+  color: #ff9f0a;
+}
+
+.home-page .candidate__meta {
+  border-top-color: #ececf1;
+}
+
+.home-page .timeline__year {
+  color: #0071e3;
+}
+
+.home-page .vote {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8fb 100%);
+  border: 1px solid #e4e4e8;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.05);
+}
+
+.home-page .vote__content h2,
+.home-page .score h3 {
+  color: #1d1d1f;
+}
+
+.home-page .score__bar {
+  background: #e8e8ed;
+}
+
+.home-page .score__bar span {
+  background: linear-gradient(90deg, #0071e3, #2997ff);
+}
+
+.home-page .site-footer {
+  color: var(--apple-muted);
+  border-top: 1px solid #dddddf;
+}
+
+.home-page .site-footer .cta--ghost {
+  color: var(--apple-blue);
+  border-color: #b8d8ff;
+}
+
 @media (max-width: 900px) {
   :root {
     --header-height: 140px;
@@ -1622,6 +1881,15 @@ main {
 
   .compare-star-svg {
     height: 360px;
+  }
+
+  .home-page .hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .home-page .hero h1 {
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
   }
 }
 
