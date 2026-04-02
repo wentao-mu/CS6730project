@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: uefa-greatest-debate
+    runtime: node
+    plan: free
+    region: virginia
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: PORT
+        value: 10000

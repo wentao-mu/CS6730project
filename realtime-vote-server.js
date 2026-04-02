@@ -4,8 +4,10 @@ const http = require("http");
 const path = require("path");
 
 const PORT = Number(process.env.PORT) || 6730;
+const HOST = process.env.HOST || "0.0.0.0";
 const SITE_DIR = path.join(__dirname, "site");
-const STORE_FILE = path.join(__dirname, "vote-store.json");
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : __dirname;
+const STORE_FILE = path.join(DATA_DIR, "vote-store.json");
 
 const CANDIDATES = ["ronaldo", "messi", "maldini", "zidane"];
 const BASELINE_COUNTS = {
@@ -33,6 +35,10 @@ const sseClients = new Set();
 
 let store = { votes: {} };
 
+async function ensureDataDir() {
+  await fsp.mkdir(DATA_DIR, { recursive: true });
+}
+
 function normalizeStore(input) {
   const votes = {};
   const candidateValues = new Set(CANDIDATES);
@@ -51,6 +57,7 @@ function normalizeStore(input) {
 
 async function loadStore() {
   try {
+    await ensureDataDir();
     const raw = await fsp.readFile(STORE_FILE, "utf8");
     store = normalizeStore(JSON.parse(raw));
   } catch {
@@ -60,6 +67,7 @@ async function loadStore() {
 }
 
 async function saveStore() {
+  await ensureDataDir();
   await fsp.writeFile(STORE_FILE, JSON.stringify(store, null, 2), "utf8");
 }
 
@@ -155,6 +163,15 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (req.method === "GET" && pathname === "/healthz") {
+    sendJson(res, 200, {
+      ok: true,
+      uptimeSeconds: Math.round(process.uptime()),
+      storeFile: STORE_FILE
+    });
+    return;
+  }
+
   if (req.method === "GET" && pathname === "/api/votes/stream") {
     res.writeHead(200, {
       "Content-Type": "text/event-stream; charset=utf-8",
@@ -212,7 +229,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 loadStore().then(() => {
-  server.listen(PORT, () => {
-    console.log(`Realtime vote server running at http://localhost:${PORT}`);
+  server.listen(PORT, HOST, () => {
+    console.log(`Realtime vote server running at http://${HOST}:${PORT}`);
   });
 });
