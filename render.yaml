@@ -4,7 +4,6 @@ services:
     runtime: node
     plan: free
     region: virginia
-    autoDeploy: false
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /healthz
