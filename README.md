@@ -2,6 +2,8 @@
 
 A web project for discussing **who is the greatest UEFA Champions League player**.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/wentao-mu/CS6730project)
+
 ## Deploy on Render
 
 This repository is ready to deploy as a Render Web Service.
