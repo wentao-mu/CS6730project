@@ -1060,6 +1060,32 @@ main {
   line-height: 1.6;
 }
 
+.goat-formula {
+  margin-top: 32px;
+  background: linear-gradient(135deg, rgba(7, 16, 42, 0.92), rgba(24, 40, 92, 0.92));
+  border: 1px solid rgba(116, 157, 255, 0.28);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.goat-formula__title {
+  font-family: var(--body-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(207, 222, 255, 0.78);
+}
+
+.goat-formula__equation {
+  font-family: var(--display-font);
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  line-height: 1.6;
+  color: #f8fbff;
+}
+
 .compare-section {
   display: grid;
   gap: 28px;
@@ -1713,6 +1739,20 @@ main {
 .home-page .criteria__grid h3,
 .home-page .compare-card h3,
 .home-page .candidate h3 {
+  color: var(--apple-text);
+}
+
+.home-page .goat-formula {
+  background: linear-gradient(135deg, #f5f8ff, #edf4ff);
+  border: 1px solid #cfe0ff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+}
+
+.home-page .goat-formula__title {
+  color: #5574aa;
+}
+
+.home-page .goat-formula__equation {
   color: var(--apple-text);
 }
 
