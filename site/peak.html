@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peak Seasons | Best UEFA Player</title>
+    <meta
+      name="description"
+      content="Rank the biggest Champions League single-season attacking peaks, then open each player's full season archive."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Work+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="profile-page peak-page" id="top">
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="brand" href="index.html">
+          <span class="brand__mark">UEFA</span>
+          <span class="brand__title">Greatest Debate</span>
+        </a>
+        <nav class="site-nav" aria-label="Key metrics">
+          <a href="goals.html">Goals</a>
+          <a href="assists.html">Assists</a>
+          <a href="trophies.html">Titles Won</a>
+          <a href="knockout.html">Knockout G+A</a>
+          <a href="appearances.html">Appearances</a>
+          <a href="bestxi.html">UEFA Best XI</a>
+          <a href="peak.html" aria-current="page">Peak</a>
+        </nav>
+        <div class="header-controls">
+          <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
+        </div>
+      </div>
+      <div class="site-header__bottom" aria-label="Star cards">
+        <a class="star-card" href="ronaldo.html" aria-label="Cristiano Ronaldo">
+          <div class="star-card__jersey star-card__jersey--real">
+            <span class="star-card__name">Ronaldo</span>
+            <span class="star-card__number">7</span>
+          </div>
+        </a>
+        <a class="star-card" href="messi.html" aria-label="Lionel Messi">
+          <div class="star-card__jersey star-card__jersey--barca">
+            <span class="star-card__name">Messi</span>
+            <span class="star-card__number">10</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro peak-intro">
+        <p class="hero__eyebrow" data-peak-copy="eyebrow"></p>
+        <h1 data-peak-copy="title"></h1>
+        <p class="hero__lead" data-peak-copy="lead"></p>
+      </section>
+
+      <section class="goals-leader-cards peak-leader-cards" data-peak-leaders></section>
+
+      <section class="goals-ranking peak-ranking-panel">
+        <div class="section-header">
+          <h2 data-peak-copy="rankingTitle"></h2>
+          <p data-peak-copy="rankingLead"></p>
+        </div>
+        <div class="peak-toolbar" aria-label="Peak controls">
+          <div class="peak-toolbar__group">
+            <span class="peak-toolbar__label" data-peak-copy="rankingScopeLabel"></span>
+            <div class="goals-ranking__controls" role="tablist" aria-label="Peak ranking size">
+              <button
+                class="goals-filter-btn is-active"
+                type="button"
+                data-peak-limit="10"
+                aria-pressed="true"
+              >
+                Top 10
+              </button>
+              <button class="goals-filter-btn" type="button" data-peak-limit="all" aria-pressed="false">
+                All
+              </button>
+            </div>
+          </div>
+          <div class="peak-toolbar__group peak-toolbar__group--search">
+            <label class="peak-toolbar__label" for="peak-search" data-peak-copy="playerSearchLabel"></label>
+            <div class="peak-search-shell">
+              <input id="peak-search" class="peak-search-input" type="search" data-peak-search />
+            </div>
+          </div>
+        </div>
+        <div class="goals-table-wrap">
+          <table class="goals-table peak-ranking-table">
+            <thead>
+              <tr>
+                <th data-peak-copy="rank"></th>
+                <th data-peak-copy="player"></th>
+                <th data-peak-copy="season"></th>
+                <th data-peak-copy="club"></th>
+                <th data-peak-copy="goals"></th>
+                <th data-peak-copy="assists"></th>
+                <th data-peak-copy="ga"></th>
+                <th data-peak-copy="appearances"></th>
+              </tr>
+            </thead>
+            <tbody data-peak-ranking-body></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="goals-ranking peak-detail-panel">
+        <div class="section-header">
+          <h2 data-peak-detail-title></h2>
+          <p data-peak-detail-copy></p>
+        </div>
+        <div class="peak-selected-meta" data-peak-selected-meta></div>
+
+        <section class="goals-leader-cards peak-summary-grid" data-peak-summary></section>
+
+        <div class="peak-detail-grid">
+          <article class="peak-heatmap-panel">
+            <div class="peak-panel-header">
+              <div class="peak-panel-copy">
+                <h3 data-peak-copy="heatmapTitle"></h3>
+                <p data-peak-copy="heatmapLead"></p>
+              </div>
+            </div>
+            <div class="peak-heatmap-scroll">
+              <div class="peak-heatmap-shell">
+                <div class="peak-heatmap-host" data-peak-heatmap></div>
+                <div class="peak-tooltip" data-peak-tooltip hidden></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="peak-stage-panel peak-snapshot-panel">
+            <div class="section-header section-header--compact">
+              <h3 data-peak-copy="snapshotTitle"></h3>
+              <p data-peak-copy="snapshotLead"></p>
+            </div>
+            <div class="goals-table-wrap peak-stage-table-wrap">
+              <table class="goals-table peak-snapshot-table">
+                <thead>
+                  <tr>
+                    <th data-peak-copy="metric"></th>
+                    <th data-peak-copy="value"></th>
+                  </tr>
+                </thead>
+                <tbody data-peak-snapshot-body></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <article class="peak-archive-panel">
+          <div class="section-header section-header--compact">
+            <h3 data-peak-copy="archiveTitle"></h3>
+            <p data-peak-copy="archiveLead"></p>
+          </div>
+          <div class="goals-table-wrap">
+            <table class="goals-table peak-archive-table">
+              <thead>
+                <tr>
+                  <th data-peak-copy="season"></th>
+                  <th data-peak-copy="club"></th>
+                  <th data-peak-copy="country"></th>
+                  <th data-peak-copy="position"></th>
+                  <th data-peak-copy="appearances"></th>
+                  <th data-peak-copy="minutes"></th>
+                  <th data-peak-copy="goals"></th>
+                  <th data-peak-copy="assists"></th>
+                  <th data-peak-copy="ga"></th>
+                  <th data-peak-copy="goalsPerMatch"></th>
+                  <th data-peak-copy="assistsPerMatch"></th>
+                  <th data-peak-copy="gaPerMatch"></th>
+                  <th data-peak-copy="goalsPer90"></th>
+                  <th data-peak-copy="assistsPer90"></th>
+                  <th data-peak-copy="gaPer90"></th>
+                </tr>
+              </thead>
+              <tbody data-peak-archive-body></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Made for debate nights, watch parties, and anyone who loves UEFA nights.</p>
+      <a class="cta cta--ghost" href="#top">Back to Top</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="assets/js/peak-season.js"></script>
+    <script src="assets/js/i18n.js"></script>
+  </body>
+</html>

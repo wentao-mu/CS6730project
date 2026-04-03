@@ -27,6 +27,7 @@
           <a href="knockout.html">Knockout G+A</a>
           <a href="appearances.html">Appearances</a>
           <a href="bestxi.html">UEFA Best XI</a>
+          <a href="peak.html">Peak</a>
         </nav>
         <div class="header-controls">
           <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
@@ -98,16 +99,17 @@
         <div class="section-header">
           <h2>How to Measure Greatness</h2>
           <p>
-            We rate the greatest Champions League player with a weighted UEFA GOAT Score. Each
-            metric is normalized first, then combined so goals, titles, appearances, and honors can
-            be compared on the same scale.
+            We rate the greatest Champions League player with a ranking-based UEFA GOAT Score. In
+            every metric, rank #1 gets 100 points, rank #2 gets 95, and every next place loses
+            five points before the weighted total is added.
           </p>
         </div>
         <div class="goat-formula" aria-label="UEFA GOAT Score formula">
           <p class="goat-formula__title">UEFA GOAT Score</p>
-          <p class="goat-formula__equation">
-            0.25 × Goals + 0.15 × Assists + 0.20 × Knockout G+A + 0.15 × Titles + 0.10 ×
-            Appearances + 0.10 × Best XI + 0.05 × Peak
+          <p class="goat-formula__rule">S = max(105 - 5r, 0)</p>
+          <p class="goat-formula__equation">U = 0.25G + 0.15A + 0.20K + 0.15T + 0.10P + 0.10B + 0.05H</p>
+          <p class="goat-formula__note">
+            G = Goals, A = Assists, K = Knockout G+A, T = Titles, P = Appearances, B = Best XI, H = Peak. Here r is the metric rank, so each lower place loses 5 points.
           </p>
         </div>
         <div class="criteria__grid">
@@ -186,29 +188,48 @@
 
       <section class="compare-section" data-goat-compare>
         <div class="section-header">
-          <h2>Ronaldo vs Messi Visual Compare</h2>
-          <p>Radar + bar view built from local datasets and key UEFA record indicators.</p>
+          <h2>Top 10 UEFA GOAT Profiles</h2>
+          <p>
+            Weighted leaderboard built from the current ranking pages on this site. Players
+            outside a page's published cutoff get 0 points for that metric.
+          </p>
         </div>
-        <div class="compare-section__layout">
-          <article class="compare-card">
-            <h3>Star Profile</h3>
-            <p>Normalized across six indicators.</p>
-            <div class="compare-star-host" data-compare-star aria-label="Ronaldo Messi star comparison"></div>
+        <div class="compare-section__layout compare-section__layout--top10">
+          <article class="compare-card compare-card--profile">
+            <div class="compare-profile-header">
+              <div>
+                <p class="compare-profile-header__eyebrow" data-goat-selected-rank></p>
+                <h3 data-goat-selected-name>Loading...</h3>
+                <p data-goat-selected-copy>
+                  Select any player from the top 10 to inspect his seven-metric shape against the
+                  top-10 baseline.
+                </p>
+              </div>
+              <div class="compare-score-chip">
+                <span>GOAT Score</span>
+                <strong data-goat-selected-score>--</strong>
+              </div>
+            </div>
+            <div class="compare-star-host" data-goat-star aria-label="Top 10 UEFA GOAT star profile"></div>
+            <div class="compare-metric-grid" data-goat-metrics></div>
           </article>
-          <article class="compare-card">
-            <h3>Bar Comparison</h3>
-            <p>Absolute values for each metric.</p>
-            <div class="compare-bars-host" data-compare-bars></div>
+          <article class="compare-card compare-card--ranking">
+            <h3>Top 10 Weighted Ranking</h3>
+            <p>
+              Scores follow the 5-point rank decay rule before weights are added. Click a row to
+              refresh the star chart.
+            </p>
+            <div class="compare-ranking-host" data-goat-ranking></div>
           </article>
         </div>
         <div class="compare-legend">
           <span class="compare-legend__item">
-            <span class="compare-legend__swatch compare-legend__swatch--ronaldo"></span>
-            Ronaldo
+            <span class="compare-legend__swatch compare-legend__swatch--selected"></span>
+            Selected player
           </span>
           <span class="compare-legend__item">
-            <span class="compare-legend__swatch compare-legend__swatch--messi"></span>
-            Messi
+            <span class="compare-legend__swatch compare-legend__swatch--baseline"></span>
+            Top-10 average
           </span>
         </div>
       </section>
@@ -277,14 +298,6 @@
         </div>
         <div class="timeline__grid">
           <div class="timeline__item">
-            <span class="timeline__year">1994</span>
-            <p>AC Milan dominate Europe with a defensive masterclass.</p>
-          </div>
-          <div class="timeline__item">
-            <span class="timeline__year">2002</span>
-            <p>Zidane’s left-footed volley becomes UEFA folklore.</p>
-          </div>
-          <div class="timeline__item">
             <span class="timeline__year">2009</span>
             <p>Messi announces a new era of Champions League artistry.</p>
           </div>
@@ -305,8 +318,6 @@
           <div class="vote__actions">
             <button class="cta" type="button" data-vote-btn data-candidate="ronaldo">Vote Ronaldo</button>
             <button class="cta" type="button" data-vote-btn data-candidate="messi">Vote Messi</button>
-            <button class="cta" type="button" data-vote-btn data-candidate="maldini">Vote Maldini</button>
-            <button class="cta" type="button" data-vote-btn data-candidate="zidane">Vote Zidane</button>
           </div>
           <p class="vote__feedback" data-vote-feedback aria-live="polite"></p>
         </div>
@@ -314,32 +325,18 @@
           <div class="score">
             <h3>Live Pulse</h3>
             <div class="score__bar">
-              <span data-vote-bar="ronaldo" style="width: 42%"></span>
+              <span data-vote-bar="ronaldo" style="width: 54.5%"></span>
             </div>
             <div class="score__labels">
               <span>Ronaldo</span>
-              <span data-vote-pct="ronaldo">42%</span>
+              <span data-vote-pct="ronaldo">54.5%</span>
             </div>
             <div class="score__bar">
-              <span data-vote-bar="messi" style="width: 35%"></span>
+              <span data-vote-bar="messi" style="width: 45.5%"></span>
             </div>
             <div class="score__labels">
               <span>Messi</span>
-              <span data-vote-pct="messi">35%</span>
-            </div>
-            <div class="score__bar">
-              <span data-vote-bar="maldini" style="width: 13%"></span>
-            </div>
-            <div class="score__labels">
-              <span>Maldini</span>
-              <span data-vote-pct="maldini">13%</span>
-            </div>
-            <div class="score__bar">
-              <span data-vote-bar="zidane" style="width: 10%"></span>
-            </div>
-            <div class="score__labels">
-              <span>Zidane</span>
-              <span data-vote-pct="zidane">10%</span>
+              <span data-vote-pct="messi">45.5%</span>
             </div>
             <p class="score__note">Realtime vote mode: one vote per browser ID across connected users.</p>
           </div>

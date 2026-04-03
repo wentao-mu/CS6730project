@@ -9,12 +9,10 @@ const SITE_DIR = path.join(__dirname, "site");
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : __dirname;
 const STORE_FILE = path.join(DATA_DIR, "vote-store.json");
 
-const CANDIDATES = ["ronaldo", "messi", "maldini", "zidane"];
+const CANDIDATES = ["ronaldo", "messi"];
 const BASELINE_COUNTS = {
   ronaldo: 42,
-  messi: 35,
-  maldini: 13,
-  zidane: 10
+  messi: 35
 };
 
 const MIME_TYPES = {

@@ -1,139 +1,104 @@
 (() => {
-  const RONALDO_CSV = "assets/data/CR7_UCL_season_stage_wide_2003_2025.csv";
-  const MESSI_CSV = "assets/data/Messi_UCL_season_stage_wide_2003_2025.csv";
+  const DATA_FILE = "assets/data/goat_top10.json";
+  const root = document.querySelector("[data-goat-compare]");
+
+  if (!root) {
+    return;
+  }
 
   const METRICS = [
-    { key: "goals_total", label: { en: "Goals", zh: "进球" }, format: (v) => `${Math.round(v)}` },
-    { key: "assists_total", label: { en: "Assists", zh: "助攻" }, format: (v) => `${Math.round(v)}` },
-    {
-      key: "knockout_ga",
-      label: { en: "Knockout G+A", zh: "淘汰赛进球+助攻" },
-      format: (v) => `${Math.round(v)}`
-    },
-    {
-      key: "pass_accuracy_avg",
-      label: { en: "Pass Accuracy %", zh: "传球成功率%" },
-      format: (v) => `${v.toFixed(1)}%`
-    },
-    { key: "titles", label: { en: "Titles", zh: "冠军数" }, format: (v) => `${Math.round(v)}` },
-    {
-      key: "appearances",
-      label: { en: "Appearances", zh: "出场次数" },
-      format: (v) => `${Math.round(v)}`
-    }
+    { key: "goals", label: { en: "Goals", zh: "进球" }, unit: "" },
+    { key: "assists", label: { en: "Assists", zh: "助攻" }, unit: "" },
+    { key: "knockout", label: { en: "Knockout G+A", zh: "淘汰赛进球+助攻" }, unit: "" },
+    { key: "titles", label: { en: "Titles", zh: "冠军数" }, unit: "" },
+    { key: "appearances", label: { en: "Appearances", zh: "出场次数" }, unit: "" },
+    { key: "bestxi", label: { en: "UEFA Best XI", zh: "欧足联最佳阵容" }, unit: "" },
+    { key: "peak", label: { en: "Peak", zh: "巅峰" }, unit: "G+A" }
   ];
 
-  const PLAYER_BASE = {
-    ronaldo: { titles: 5, appearances: 183 },
-    messi: { titles: 4, appearances: 163 }
+  const COPY = {
+    loading: {
+      en: "Loading weighted GOAT profiles.",
+      zh: "正在加载加权 GOAT 画像。"
+    },
+    error: {
+      en: "Failed to load GOAT ranking data.",
+      zh: "GOAT 排名数据加载失败。"
+    },
+    rankLabel: {
+      en: "Overall rank",
+      zh: "总排名"
+    },
+    peakSeason: {
+      en: "Peak season",
+      zh: "巅峰赛季"
+    },
+    profileCopy: {
+      en: "Radar shows metric points against the current top-10 average. Click the ranking to switch profile.",
+      zh: "星图展示该球员七项得分与当前前十平均值的对比。点击右侧榜单可切换画像。"
+    },
+    score: {
+      en: "GOAT Score",
+      zh: "GOAT 得分"
+    },
+    points: {
+      en: "pts",
+      zh: "分"
+    },
+    weight: {
+      en: "weight",
+      zh: "权重"
+    },
+    outOfCutoff: {
+      en: "Outside page cutoff",
+      zh: "未进入当前榜单"
+    },
+    rankingValue: {
+      en: "weighted score",
+      zh: "加权得分"
+    }
   };
 
-  const host = document.querySelector("[data-goat-compare]");
-  if (!host) {
+  const elements = {
+    starHost: root.querySelector("[data-goat-star]"),
+    rankingHost: root.querySelector("[data-goat-ranking]"),
+    selectedRank: root.querySelector("[data-goat-selected-rank]"),
+    selectedName: root.querySelector("[data-goat-selected-name]"),
+    selectedCopy: root.querySelector("[data-goat-selected-copy]"),
+    selectedScore: root.querySelector("[data-goat-selected-score]"),
+    metrics: root.querySelector("[data-goat-metrics]")
+  };
+
+  if (
+    !elements.starHost ||
+    !elements.rankingHost ||
+    !elements.selectedRank ||
+    !elements.selectedName ||
+    !elements.selectedCopy ||
+    !elements.selectedScore ||
+    !elements.metrics
+  ) {
     return;
   }
 
-  const starHost = host.querySelector("[data-compare-star]");
-  const barsHost = host.querySelector("[data-compare-bars]");
-  if (!starHost || !barsHost) {
-    return;
-  }
-
-  let stats = null;
+  let dataset = null;
+  let selectedIndex = 0;
 
   function getLang() {
     return document.documentElement.lang.toLowerCase().startsWith("zh") ? "zh" : "en";
   }
 
-  function parseCsvLine(line) {
-    const cells = [];
-    let current = "";
-    let inQuotes = false;
-
-    for (let i = 0; i < line.length; i += 1) {
-      const ch = line[i];
-      if (ch === '"') {
-        if (inQuotes && line[i + 1] === '"') {
-          current += '"';
-          i += 1;
-        } else {
-          inQuotes = !inQuotes;
-        }
-      } else if (ch === "," && !inQuotes) {
-        cells.push(current);
-        current = "";
-      } else {
-        current += ch;
-      }
-    }
-
-    cells.push(current);
-    return cells;
+  function textFor(copy) {
+    return copy[getLang()];
   }
 
-  function parseCsv(text) {
-    const lines = text
-      .split(/\r?\n/)
-      .map((line) => line.trimEnd())
-      .filter((line) => line.length > 0);
-
-    if (lines.length < 2) {
-      return [];
-    }
-
-    const headers = parseCsvLine(lines[0]);
-    return lines.slice(1).map((line) => {
-      const values = parseCsvLine(line);
-      const row = {};
-      headers.forEach((header, idx) => {
-        row[header] = values[idx] || "";
-      });
-      return row;
-    });
-  }
-
-  function num(value) {
-    const parsed = Number.parseFloat(value);
-    return Number.isFinite(parsed) ? parsed : 0;
-  }
-
-  function computePlayerStats(rows, base) {
-    let goalsTotal = 0;
-    let assistsTotal = 0;
-    let knockoutGoals = 0;
-    let knockoutAssists = 0;
-    const passAccValues = [];
-
-    rows.forEach((row) => {
-      ["group_stage", "round_of_16", "quarter_finals", "semi_finals", "final"].forEach((stage) => {
-        goalsTotal += num(row[`goals_${stage}`]);
-        assistsTotal += num(row[`assists_${stage}`]);
-
-        const accValue = row[`pass_accuracy_pct_${stage}`];
-        if (accValue !== "") {
-          passAccValues.push(num(accValue));
-        }
-      });
-
-      ["round_of_16", "quarter_finals", "semi_finals", "final"].forEach((stage) => {
-        knockoutGoals += num(row[`goals_${stage}`]);
-        knockoutAssists += num(row[`assists_${stage}`]);
-      });
-    });
-
-    const passAccuracyAvg =
-      passAccValues.length > 0
-        ? passAccValues.reduce((sum, value) => sum + value, 0) / passAccValues.length
-        : 0;
-
-    return {
-      goals_total: goalsTotal,
-      assists_total: assistsTotal,
-      knockout_ga: knockoutGoals + knockoutAssists,
-      pass_accuracy_avg: passAccuracyAvg,
-      titles: base.titles,
-      appearances: base.appearances
-    };
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
   }
 
   function createSvgElement(tag, attrs = {}) {
@@ -142,39 +107,6 @@
       el.setAttribute(key, String(value));
     });
     return el;
-  }
-
-  function getMetricValues(metric, compareStats) {
-    return {
-      ronaldo: compareStats.ronaldo[metric.key],
-      messi: compareStats.messi[metric.key]
-    };
-  }
-
-  function renderBars(compareStats) {
-    const lang = getLang();
-    const ronaldoName = lang === "zh" ? "C罗" : "Ronaldo";
-    const messiName = lang === "zh" ? "梅西" : "Messi";
-
-    barsHost.innerHTML = METRICS.map((metric) => {
-      const values = getMetricValues(metric, compareStats);
-      const maxValue = Math.max(values.ronaldo, values.messi, 1);
-      const ronaldoPct = (values.ronaldo / maxValue) * 100;
-      const messiPct = (values.messi / maxValue) * 100;
-
-      return `
-        <div class="compare-bar-row">
-          <div class="compare-bar-row__header">
-            <span class="compare-bar-row__label">${metric.label[lang]}</span>
-            <span class="compare-bar-row__value">${ronaldoName} ${metric.format(values.ronaldo)} · ${messiName} ${metric.format(values.messi)}</span>
-          </div>
-          <div class="compare-bar-track">
-            <div class="compare-bar compare-bar--ronaldo"><span style="width:${ronaldoPct.toFixed(1)}%"></span></div>
-            <div class="compare-bar compare-bar--messi"><span style="width:${messiPct.toFixed(1)}%"></span></div>
-          </div>
-        </div>
-      `;
-    }).join("");
   }
 
   function polygonPoints(cx, cy, radius, ratios) {
@@ -189,38 +121,90 @@
       .join(" ");
   }
 
-  function renderStar(compareStats) {
-    const lang = getLang();
-    const size = 420;
+  function formatMetricValue(metric, metricData) {
+    if (metricData.value === null || metricData.value === undefined) {
+      return textFor(COPY.outOfCutoff);
+    }
+
+    if (metric.key === "peak") {
+      const season = metricData.season ? ` · ${metricData.season}` : "";
+      return `${metricData.value} G+A${season}`;
+    }
+
+    return `${metricData.value}${metric.unit ? ` ${metric.unit}` : ""}`;
+  }
+
+  function renderSelectedProfile() {
+    const player = dataset.players[selectedIndex];
+    elements.selectedRank.textContent = `${textFor(COPY.rankLabel)} #${player.overall_rank}`;
+    elements.selectedName.textContent = player.name;
+    const peak = player.metrics.peak;
+    const peakCopy =
+      peak && peak.season
+        ? `${textFor(COPY.peakSeason)} ${peak.season}. ${textFor(COPY.profileCopy)}`
+        : textFor(COPY.profileCopy);
+    elements.selectedCopy.textContent = peakCopy;
+    elements.selectedScore.textContent = player.score.toFixed(2);
+
+    elements.metrics.innerHTML = METRICS.map((metric) => {
+      const metricData = player.metrics[metric.key];
+      const weight = dataset.weights[metric.key];
+
+      return `
+        <article class="compare-metric-card">
+          <p class="compare-metric-card__label">${escapeHtml(metric.label[getLang()])}</p>
+          <strong class="compare-metric-card__value">${escapeHtml(formatMetricValue(metric, metricData))}</strong>
+          <p class="compare-metric-card__meta">
+            ${metricData.points} ${escapeHtml(textFor(COPY.points))} · ${Math.round(weight * 100)}% ${escapeHtml(textFor(COPY.weight))}
+          </p>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function renderRanking() {
+    const maxScore = dataset.players[0]?.score || 1;
+
+    elements.rankingHost.innerHTML = dataset.players
+      .map((player, index) => {
+        const active = index === selectedIndex ? " is-active" : "";
+        const width = Math.max(8, (player.score / maxScore) * 100);
+        return `
+          <button class="compare-ranking-row${active}" type="button" data-player-index="${index}" aria-pressed="${index === selectedIndex ? "true" : "false"}">
+            <div class="compare-ranking-row__header">
+              <span class="compare-ranking-row__rank">#${player.overall_rank}</span>
+              <span class="compare-ranking-row__name">${escapeHtml(player.name)}</span>
+              <span class="compare-ranking-row__score">${player.score.toFixed(2)}</span>
+            </div>
+            <div class="compare-ranking-row__track">
+              <span class="compare-ranking-row__fill" style="width:${width.toFixed(1)}%"></span>
+            </div>
+          </button>
+        `;
+      })
+      .join("");
+  }
+
+  function renderStar() {
+    const player = dataset.players[selectedIndex];
+    const average = dataset.top10_average_points;
+    const size = 430;
     const cx = size / 2;
     const cy = size / 2;
-    const radius = 145;
+    const radius = 150;
 
-    const metricMax = {};
-    METRICS.forEach((metric) => {
-      metricMax[metric.key] = Math.max(
-        compareStats.ronaldo[metric.key],
-        compareStats.messi[metric.key],
-        1
-      );
-    });
+    const playerRatios = METRICS.map((metric) => player.metrics[metric.key].points / 100);
+    const averageRatios = METRICS.map((metric) => average[metric.key] / 100);
 
-    const ronaldoRatios = METRICS.map(
-      (metric) => compareStats.ronaldo[metric.key] / metricMax[metric.key]
-    );
-    const messiRatios = METRICS.map(
-      (metric) => compareStats.messi[metric.key] / metricMax[metric.key]
-    );
-
-    starHost.innerHTML = "";
+    elements.starHost.innerHTML = "";
     const svg = createSvgElement("svg", {
       class: "compare-star-svg",
-      viewBox: "0 0 420 420",
+      viewBox: "0 0 430 430",
       role: "img",
       "aria-label":
-        lang === "zh"
-          ? "C罗与梅西星图对比"
-          : "Ronaldo and Messi star profile comparison"
+        getLang() === "zh"
+          ? `${player.name} 的前十 GOAT 星图`
+          : `${player.name} top-10 GOAT radar`
     });
 
     for (let ring = 1; ring <= 5; ring += 1) {
@@ -228,7 +212,7 @@
         createSvgElement("polygon", {
           points: polygonPoints(cx, cy, radius, METRICS.map(() => ring / 5)),
           fill: "none",
-          stroke: "rgba(255,255,255,0.18)",
+          stroke: "rgba(31, 37, 49, 0.14)",
           "stroke-width": "1"
         })
       );
@@ -244,75 +228,89 @@
           y1: cy,
           x2: x2.toFixed(2),
           y2: y2.toFixed(2),
-          stroke: "rgba(255,255,255,0.24)",
+          stroke: "rgba(31, 37, 49, 0.18)",
           "stroke-width": "1"
         })
       );
 
-      const labelX = cx + Math.cos(angle) * (radius + 24);
-      const labelY = cy + Math.sin(angle) * (radius + 24);
+      const labelX = cx + Math.cos(angle) * (radius + 26);
+      const labelY = cy + Math.sin(angle) * (radius + 26);
       const text = createSvgElement("text", {
         x: labelX.toFixed(2),
         y: labelY.toFixed(2),
-        fill: "rgba(242,246,255,0.88)",
+        fill: "#1f1f21",
         "font-size": "12",
+        "font-weight": "700",
         "text-anchor": labelX < cx - 8 ? "end" : labelX > cx + 8 ? "start" : "middle",
         "dominant-baseline": "middle"
       });
-      text.textContent = metric.label[lang];
+      text.textContent = metric.label[getLang()];
       svg.appendChild(text);
     });
 
     svg.appendChild(
       createSvgElement("polygon", {
-        points: polygonPoints(cx, cy, radius, ronaldoRatios),
-        fill: "rgba(34, 120, 255, 0.28)",
-        stroke: "#56a7ff",
-        "stroke-width": "2"
+        points: polygonPoints(cx, cy, radius, averageRatios),
+        fill: "rgba(166, 174, 189, 0.18)",
+        stroke: "#8f99ab",
+        "stroke-width": "2",
+        "stroke-dasharray": "6 5"
       })
     );
 
     svg.appendChild(
       createSvgElement("polygon", {
-        points: polygonPoints(cx, cy, radius, messiRatios),
-        fill: "rgba(201, 35, 78, 0.25)",
-        stroke: "#ff7798",
-        "stroke-width": "2"
+        points: polygonPoints(cx, cy, radius, playerRatios),
+        fill: "rgba(0, 113, 227, 0.20)",
+        stroke: "#0071e3",
+        "stroke-width": "2.5"
       })
     );
 
-    starHost.appendChild(svg);
+    elements.starHost.appendChild(svg);
   }
 
   function render() {
-    if (!stats) {
+    if (!dataset) {
       return;
     }
-    renderStar(stats);
-    renderBars(stats);
+
+    renderSelectedProfile();
+    renderRanking();
+    renderStar();
   }
 
   async function init() {
+    elements.starHost.innerHTML = `<p class="compare-loading">${escapeHtml(textFor(COPY.loading))}</p>`;
+
     try {
-      const [ronaldoText, messiText] = await Promise.all([
-        fetch(RONALDO_CSV).then((response) => response.text()),
-        fetch(MESSI_CSV).then((response) => response.text())
-      ]);
+      const response = await fetch(DATA_FILE);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
 
-      const ronaldoRows = parseCsv(ronaldoText);
-      const messiRows = parseCsv(messiText);
-
-      stats = {
-        ronaldo: computePlayerStats(ronaldoRows, PLAYER_BASE.ronaldo),
-        messi: computePlayerStats(messiRows, PLAYER_BASE.messi)
-      };
-
+      dataset = await response.json();
       render();
     } catch (error) {
-      barsHost.innerHTML =
-        '<p class="compare-bar-row__value">Failed to load comparison data.</p>';
+      elements.starHost.innerHTML = `<p class="compare-loading">${escapeHtml(textFor(COPY.error))}</p>`;
+      elements.rankingHost.innerHTML = "";
     }
   }
+
+  elements.rankingHost.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-player-index]");
+    if (!button) {
+      return;
+    }
+
+    const nextIndex = Number(button.getAttribute("data-player-index"));
+    if (!Number.isFinite(nextIndex) || !dataset || nextIndex === selectedIndex) {
+      return;
+    }
+
+    selectedIndex = nextIndex;
+    render();
+  });
 
   const langToggle = document.querySelector("[data-lang-toggle]");
   if (langToggle) {
@@ -322,8 +320,8 @@
   }
 
   window.addEventListener("resize", () => {
-    if (stats) {
-      renderStar(stats);
+    if (dataset) {
+      renderStar();
     }
   });
 

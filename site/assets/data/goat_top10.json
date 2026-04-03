@@ -1,0 +1,487 @@
+{
+  "generated_at": "2026-04-03",
+  "weights": {
+    "goals": 0.25,
+    "assists": 0.15,
+    "knockout": 0.2,
+    "titles": 0.15,
+    "appearances": 0.1,
+    "bestxi": 0.1,
+    "peak": 0.05
+  },
+  "metrics": [
+    {
+      "key": "goals",
+      "value_key": "Goals"
+    },
+    {
+      "key": "assists",
+      "value_key": "Assists"
+    },
+    {
+      "key": "knockout",
+      "value_key": "Knockout G+A"
+    },
+    {
+      "key": "titles",
+      "value_key": "Titles"
+    },
+    {
+      "key": "appearances",
+      "value_key": "Appearances"
+    },
+    {
+      "key": "bestxi",
+      "value_key": "UEFA Best XI"
+    },
+    {
+      "key": "peak",
+      "value_key": "Peak"
+    }
+  ],
+  "players": [
+    {
+      "name": "Cristiano Ronaldo",
+      "score": 98.25,
+      "metrics": {
+        "goals": {
+          "rank": "1",
+          "points": 100,
+          "value": 140
+        },
+        "assists": {
+          "rank": "1",
+          "points": 100,
+          "value": 42
+        },
+        "knockout": {
+          "rank": "1",
+          "points": 100,
+          "value": 82
+        },
+        "titles": {
+          "rank": "3=",
+          "points": 90,
+          "value": 5
+        },
+        "appearances": {
+          "rank": "1",
+          "points": 100,
+          "value": 183
+        },
+        "bestxi": {
+          "rank": "1",
+          "points": 100,
+          "value": 15
+        },
+        "peak": {
+          "rank": "2",
+          "points": 95,
+          "value": 22,
+          "season": "13/14"
+        }
+      },
+      "overall_rank": 1
+    },
+    {
+      "name": "Lionel Messi",
+      "score": 79.0,
+      "metrics": {
+        "goals": {
+          "rank": "2",
+          "points": 95,
+          "value": 129
+        },
+        "assists": {
+          "rank": "3",
+          "points": 90,
+          "value": 40
+        },
+        "knockout": {
+          "rank": "2",
+          "points": 95,
+          "value": 61
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": "3=",
+          "points": 90,
+          "value": 163
+        },
+        "bestxi": {
+          "rank": "2",
+          "points": 95,
+          "value": 12
+        },
+        "peak": {
+          "rank": "4",
+          "points": 85,
+          "value": 19,
+          "season": "11/12"
+        }
+      },
+      "overall_rank": 2
+    },
+    {
+      "name": "Karim Benzema",
+      "score": 71.5,
+      "metrics": {
+        "goals": {
+          "rank": "4",
+          "points": 85,
+          "value": 90
+        },
+        "assists": {
+          "rank": "10",
+          "points": 55,
+          "value": 29
+        },
+        "knockout": {
+          "rank": "4",
+          "points": 85,
+          "value": 41
+        },
+        "titles": {
+          "rank": "3=",
+          "points": 90,
+          "value": 5
+        },
+        "appearances": {
+          "rank": "5",
+          "points": 80,
+          "value": 152
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "7",
+          "points": 70,
+          "value": 16,
+          "season": "21/22"
+        }
+      },
+      "overall_rank": 3
+    },
+    {
+      "name": "Thomas Müller",
+      "score": 53.0,
+      "metrics": {
+        "goals": {
+          "rank": "7",
+          "points": 70,
+          "value": 56
+        },
+        "assists": {
+          "rank": "7=",
+          "points": 70,
+          "value": 30
+        },
+        "knockout": {
+          "rank": "5",
+          "points": 80,
+          "value": 40
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": "3=",
+          "points": 90,
+          "value": 163
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "21",
+          "points": 0,
+          "value": 11,
+          "season": "15/16"
+        }
+      },
+      "overall_rank": 4
+    },
+    {
+      "name": "Robert Lewandowski",
+      "score": 45.0,
+      "metrics": {
+        "goals": {
+          "rank": "3",
+          "points": 90,
+          "value": 105
+        },
+        "assists": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "knockout": {
+          "rank": "3",
+          "points": 90,
+          "value": 44
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "3",
+          "points": 90,
+          "value": 21,
+          "season": "19/20"
+        }
+      },
+      "overall_rank": 5
+    },
+    {
+      "name": "Raúl",
+      "score": 33.0,
+      "metrics": {
+        "goals": {
+          "rank": "5",
+          "points": 80,
+          "value": 71
+        },
+        "assists": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "knockout": {
+          "rank": "8",
+          "points": 65,
+          "value": 25
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "104",
+          "points": 0,
+          "value": 7,
+          "season": "10/11"
+        }
+      },
+      "overall_rank": 6
+    },
+    {
+      "name": "Kylian Mbappé",
+      "score": 31.25,
+      "metrics": {
+        "goals": {
+          "rank": "8=",
+          "points": 65,
+          "value": 55
+        },
+        "assists": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "knockout": {
+          "rank": "6",
+          "points": 75,
+          "value": 28
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "25",
+          "points": 0,
+          "value": 11,
+          "season": "20/21"
+        }
+      },
+      "overall_rank": 7
+    },
+    {
+      "name": "Vinícius Júnior",
+      "score": 28.25,
+      "metrics": {
+        "goals": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "assists": {
+          "rank": "7=",
+          "points": 70,
+          "value": 30
+        },
+        "knockout": {
+          "rank": "6",
+          "points": 75,
+          "value": 28
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "bestxi": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "peak": {
+          "rank": "10",
+          "points": 55,
+          "value": 13,
+          "season": "22/23"
+        }
+      },
+      "overall_rank": 8
+    },
+    {
+      "name": "Sergio Ramos",
+      "score": 26.75,
+      "metrics": {
+        "goals": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "assists": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "knockout": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "titles": {
+          "rank": "6=",
+          "points": 75,
+          "value": 4
+        },
+        "appearances": {
+          "rank": "8=",
+          "points": 65,
+          "value": 142
+        },
+        "bestxi": {
+          "rank": "3",
+          "points": 90,
+          "value": 11
+        },
+        "peak": {
+          "rank": "237",
+          "points": 0,
+          "value": 5,
+          "season": "13/14"
+        }
+      },
+      "overall_rank": 9
+    },
+    {
+      "name": "Xavi Hernández",
+      "score": 26.5,
+      "metrics": {
+        "goals": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "assists": {
+          "rank": "7=",
+          "points": 70,
+          "value": 30
+        },
+        "knockout": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "titles": {
+          "rank": null,
+          "points": 0,
+          "value": null
+        },
+        "appearances": {
+          "rank": "6",
+          "points": 75,
+          "value": 151
+        },
+        "bestxi": {
+          "rank": "4=",
+          "points": 85,
+          "value": 9
+        },
+        "peak": {
+          "rank": "42",
+          "points": 0,
+          "value": 9,
+          "season": "08/09"
+        }
+      },
+      "overall_rank": 10
+    }
+  ],
+  "top10_average_points": {
+    "goals": 58.5,
+    "assists": 45.5,
+    "knockout": 66.5,
+    "titles": 25.5,
+    "appearances": 50.0,
+    "bestxi": 37.0,
+    "peak": 39.5
+  },
+  "notes": [
+    "Scores use the current ranking pages in this project. Players outside a page's published cutoff receive 0 points for that metric.",
+    "Knockout G+A uses the March 2026 Opta Analyst all-time knockout chart because the local knockout page is head-to-head only."
+  ]
+}

@@ -1,5 +1,5 @@
 (() => {
-  const CANDIDATES = ["ronaldo", "messi", "maldini", "zidane"];
+  const CANDIDATES = ["ronaldo", "messi"];
   const VOTER_ID_KEY = "uefa_vote_voter_id_v1";
 
   const buttons = Array.from(document.querySelectorAll("[data-vote-btn]"));
@@ -37,8 +37,8 @@
 
   function getCandidateLabel(candidate) {
     const labels = {
-      en: { ronaldo: "Ronaldo", messi: "Messi", maldini: "Maldini", zidane: "Zidane" },
-      zh: { ronaldo: "C罗", messi: "梅西", maldini: "马尔蒂尼", zidane: "齐达内" }
+      en: { ronaldo: "Ronaldo", messi: "Messi" },
+      zh: { ronaldo: "C罗", messi: "梅西" }
     };
     return labels[getLang()][candidate] || candidate;
   }

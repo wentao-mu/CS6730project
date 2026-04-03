@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body class="profile-page" id="top">
+  <body class="profile-page knockout-page" id="top">
     <header class="site-header">
       <div class="site-header__top">
         <a class="brand" href="index.html">
@@ -27,6 +27,7 @@
           <a href="knockout.html" aria-current="page">Knockout G+A</a>
           <a href="appearances.html">Appearances</a>
           <a href="bestxi.html">UEFA Best XI</a>
+          <a href="peak.html">Peak</a>
         </nav>
         <div class="header-controls">
           <button class="lang-toggle" type="button" data-lang-toggle>EN/中文</button>
@@ -58,104 +59,82 @@
         </p>
       </section>
 
-      <section class="goals-leader-cards">
-        <article class="goals-leader-card">
-          <span class="goals-leader-card__rank">Ronaldo</span>
-          <h3>Total Knockout G+A</h3>
-          <strong>82</strong>
-        </article>
-        <article class="goals-leader-card">
-          <span class="goals-leader-card__rank">Messi</span>
-          <h3>Total Knockout G+A</h3>
-          <strong>61</strong>
-        </article>
-        <article class="goals-leader-card">
-          <span class="goals-leader-card__rank">Gap</span>
-          <h3>Knockout Difference</h3>
-          <strong>+21 (Ronaldo)</strong>
-        </article>
+      <section class="goals-ranking knockout-explorer" data-knockout-app>
+        <div class="section-header">
+          <h2 data-knockout-heading></h2>
+          <p data-knockout-copy></p>
+        </div>
+        <div class="knockout-toolbar">
+          <div class="knockout-toolbar__group">
+            <span class="knockout-toolbar__label" data-knockout-stage-label></span>
+            <div class="goals-ranking__controls" data-knockout-stage-controls></div>
+          </div>
+          <div class="knockout-toolbar__group">
+            <span class="knockout-toolbar__label" data-knockout-metric-label></span>
+            <div class="goals-ranking__controls" data-knockout-metric-controls></div>
+          </div>
+        </div>
+        <p class="goals-ranking__hint" data-knockout-hint></p>
+        <div class="goals-leader-cards" data-knockout-summary></div>
       </section>
 
       <section class="goals-ranking">
         <div class="section-header">
-          <h2>Stage Breakdown (Goals + Assists)</h2>
-          <p>Totals from local season-stage datasets used in this project.</p>
+          <h2 data-knockout-chart-title></h2>
+          <p data-knockout-chart-copy></p>
         </div>
-        <div class="goals-table-wrap">
-          <table class="goals-table">
-            <thead>
-              <tr>
-                <th>Stage</th>
-                <th>Ronaldo</th>
-                <th>Messi</th>
-                <th>Edge</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Round of 16</td>
-                <td>34</td>
-                <td>35</td>
-                <td>Messi +1</td>
-              </tr>
-              <tr>
-                <td>Quarter-finals</td>
-                <td>28</td>
-                <td>15</td>
-                <td>Ronaldo +13</td>
-              </tr>
-              <tr>
-                <td>Semi-finals</td>
-                <td>15</td>
-                <td>9</td>
-                <td>Ronaldo +6</td>
-              </tr>
-              <tr>
-                <td>Final</td>
-                <td>5</td>
-                <td>2</td>
-                <td>Ronaldo +3</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="knockout-toolbar">
+          <div class="knockout-toolbar__group">
+            <span class="knockout-toolbar__label" data-knockout-chart-mode-label></span>
+            <div class="goals-ranking__controls" data-knockout-chart-mode-controls></div>
+          </div>
+          <div class="knockout-toolbar__group">
+            <span class="knockout-toolbar__label" data-knockout-zoom-label></span>
+            <button class="goals-filter-btn" type="button" data-knockout-reset-zoom></button>
+          </div>
+        </div>
+        <div class="compare-legend knockout-chart-legend" data-knockout-chart-legend></div>
+        <div class="knockout-chart-panel">
+          <div class="knockout-chart-scroll">
+            <div class="knockout-chart-shell">
+              <div class="knockout-chart-host" data-knockout-chart-host></div>
+              <div class="knockout-chart-tooltip" data-knockout-chart-tooltip hidden></div>
+            </div>
+          </div>
+        </div>
+        <div class="knockout-heatmap-block">
+          <div class="section-header knockout-heatmap-copy">
+            <h3 data-knockout-heatmap-title></h3>
+            <p data-knockout-heatmap-copy></p>
+          </div>
+          <div class="knockout-heatmap-panel">
+            <div class="knockout-heatmap-scroll">
+              <div class="knockout-heatmap-shell">
+                <div class="knockout-heatmap-host" data-knockout-heatmap-host></div>
+                <div class="knockout-chart-tooltip knockout-chart-tooltip--heatmap" data-knockout-heatmap-tooltip hidden></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="goals-ranking">
         <div class="section-header">
-          <h2>Knockout Split by Metric</h2>
-          <p>Separate totals to support your own argument, not a fixed verdict.</p>
+          <h2 data-knockout-stage-title></h2>
+          <p data-knockout-stage-copy></p>
+        </div>
+        <div class="knockout-stage-grid" data-knockout-stage-grid></div>
+      </section>
+
+      <section class="goals-ranking">
+        <div class="section-header">
+          <h2 data-knockout-season-title></h2>
+          <p data-knockout-season-copy></p>
         </div>
         <div class="goals-table-wrap">
           <table class="goals-table">
-            <thead>
-              <tr>
-                <th>Metric</th>
-                <th>Ronaldo</th>
-                <th>Messi</th>
-                <th>Edge</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Knockout goals</td>
-                <td>67</td>
-                <td>49</td>
-                <td>Ronaldo +18</td>
-              </tr>
-              <tr>
-                <td>Knockout assists</td>
-                <td>15</td>
-                <td>12</td>
-                <td>Ronaldo +3</td>
-              </tr>
-              <tr>
-                <td>Knockout G+A</td>
-                <td>82</td>
-                <td>61</td>
-                <td>Ronaldo +21</td>
-              </tr>
-            </tbody>
+            <thead data-knockout-season-head></thead>
+            <tbody data-knockout-season-body></tbody>
           </table>
         </div>
       </section>
@@ -166,5 +145,7 @@
       <a class="cta cta--ghost" href="#top">Back to Top</a>
     </footer>
       <script src="assets/js/i18n.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+      <script src="assets/js/knockout-headtohead.js"></script>
   </body>
 </html>
