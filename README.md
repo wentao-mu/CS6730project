@@ -1,70 +1,214 @@
-# CS6730 UEFA Greatest Debate
+# UEFA Greatest Debate
 
-A web project for discussing **who is the greatest UEFA Champions League player**.
+An interactive UEFA Champions League debate site built for CS6730.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/wentao-mu/CS6730project)
+The project asks a simple question: who is the greatest UEFA player of all time? Instead of relying only on opinion, the site combines seven Champions League metrics into a ranking-based `UEFA GOAT Score`, then lets visitors explore the evidence page by page.
 
-## Deploy on Render
+Live site: [https://uefa-greatest-debate.onrender.com/](https://uefa-greatest-debate.onrender.com/)
 
-This repository is ready to deploy as a Render Web Service.
+## Project Overview
 
-### Option 1) Blueprint deploy
-1. Push this repo to GitHub.
-2. In Render, create a new `Blueprint`.
-3. Point Render at this repository.
-4. Render will read [`render.yaml`](render.yaml) and create the service automatically.
+This site mixes editorial storytelling, metric dashboards, and lightweight data interaction:
 
-### Option 2) Manual Web Service deploy
-Use these settings in Render:
+- A homepage that introduces the debate, explains the scoring formula, and shows the current top-10 weighted ranking.
+- Metric pages for `Goals`, `Assists`, `Titles Won`, `Knockout G+A`, `Appearances`, `UEFA Best XI`, and `Peak`.
+- A `Peak` page that ranks the highest single-season `Goals + Assists` totals and opens a detailed player view with tables and a heatmap.
+- A `Knockout` page with advanced head-to-head interaction, including stage filters, chart mode switching, zoom, and heatmap views.
+- Two player profile pages for Ronaldo and Messi.
+- A realtime vote module that lets visitors vote between Ronaldo and Messi and updates the page live with Server-Sent Events.
 
-- Runtime: `Node`
-- Build Command: `npm install`
-- Start Command: `npm start`
-- Health Check Path: `/healthz`
+## UEFA GOAT Score
 
-After deployment, Render will assign a public `onrender.com` URL that you can submit in Canvas.
+The site uses a ranking-based point system rather than raw-value normalization.
 
-### Vote storage on Render
-- On the free plan, vote data is ephemeral and may reset after a restart or redeploy.
-- If you want votes to persist, attach a Render persistent disk on a paid plan and set `DATA_DIR` to the disk mount path such as `/var/data`.
+For each metric:
 
-## Quick Start
+```text
+S = max(105 - 5r, 0)
+```
 
-### 1) Requirements
-- Node.js 18+
+Where:
 
-### 2) Run
+- `S` is the score for one metric
+- `r` is the player's rank in that metric
+- rank `#1` gets `100`
+- each lower place loses `5` points
+- scores do not go below `0`
+
+The final weighted score is:
+
+```text
+U = 0.25G + 0.15A + 0.20K + 0.15T + 0.10P + 0.10B + 0.05H
+```
+
+Where:
+
+- `G` = Goals
+- `A` = Assists
+- `K` = Knockout G+A
+- `T` = Titles
+- `P` = Appearances
+- `B` = UEFA Best XI
+- `H` = Peak
+
+## Pages
+
+- `site/index.html`: homepage, scoring explanation, top-10 comparison, vote module
+- `site/goals.html`: goals leaderboard and Ronaldo/Messi comparison
+- `site/assists.html`: assists leaderboard and comparison
+- `site/trophies.html`: titles comparison
+- `site/knockout.html`: interactive knockout-stage comparison view
+- `site/appearances.html`: appearances comparison
+- `site/bestxi.html`: UEFA Best XI comparison
+- `site/peak.html`: all-player peak-season ranking with detailed drill-down
+- `site/ronaldo.html`: Ronaldo profile
+- `site/messi.html`: Messi profile
+
+## Tech Stack
+
+- Static frontend: HTML, CSS, vanilla JavaScript
+- Local/backend server: Node.js `http` server
+- Realtime updates: Server-Sent Events
+- Deployment: Render Web Service
+- Data files: CSV and JSON stored in `site/assets/data/`
+
+## Repository Structure
+
+```text
+site/
+  assets/
+    css/
+    data/
+    js/
+    logos/
+    media/
+scripts/
+  build_goat_top10.py
+  fetch_ucl_peak_seasons.py
+realtime-vote-server.js
+render.yaml
+package.json
+```
+
+Key files:
+
+- `realtime-vote-server.js`: serves the site, vote API, SSE stream, and health check
+- `site/assets/js/index-compare.js`: renders the homepage top-10 comparison
+- `site/assets/js/knockout-headtohead.js`: knockout chart, zoom, and heatmap interactions
+- `site/assets/js/peak-season.js`: all-player peak-season ranking and player drill-down
+- `scripts/build_goat_top10.py`: generates `site/assets/data/goat_top10.json`
+- `scripts/fetch_ucl_peak_seasons.py`: generates the all-player peak-season CSV
+
+## Local Development
+
+### Requirements
+
+- Node.js 18 or newer
+
+### Run the site
+
 ```bash
-cd "/Users/carl/codex project/CS6730 project"
+npm install
 npm start
 ```
 
-Then open:
-- http://localhost:6730
+Default local URL:
 
-## What this starts
-- Static site from `site/`
-- Realtime vote API:
-  - `GET /api/votes`
-  - `POST /api/vote`
-  - `GET /api/votes/stream` (SSE)
-
-Votes are stored in:
-- `vote-store.json`
-
-## Optional
-Use the helper script:
-```bash
-cd "/Users/carl/codex project/CS6730 project"
-./start-realtime.sh
+```text
+http://localhost:6730
 ```
 
-## Stop
-In terminal, press `Ctrl + C`.
+### Useful endpoints
 
-## If port 6730 is already in use
+- `GET /`
+- `GET /healthz`
+- `GET /api/votes`
+- `POST /api/vote`
+- `GET /api/votes/stream`
+
+### Change the port
+
 ```bash
-cd "/Users/carl/codex project/CS6730 project"
 PORT=6740 npm start
 ```
-Then open `http://localhost:6740`.
+
+## Vote System
+
+The live vote module currently supports only two candidates:
+
+- `ronaldo`
+- `messi`
+
+Votes are stored in:
+
+```text
+vote-store.json
+```
+
+Baseline counts are seeded in the server so the public chart does not start from zero.
+
+## Data Generation
+
+### Rebuild the top-10 GOAT ranking JSON
+
+```bash
+python3 scripts/build_goat_top10.py
+```
+
+This generates:
+
+```text
+site/assets/data/goat_top10.json
+```
+
+### Rebuild the all-player peak-season dataset
+
+```bash
+python3 scripts/fetch_ucl_peak_seasons.py
+```
+
+This generates:
+
+```text
+site/assets/data/ucl_player_season_totals_2003_2025.csv
+```
+
+## Deploying on Render
+
+This repository is already configured for Render.
+
+### Blueprint deploy
+
+1. Push the repository to GitHub.
+2. In Render, create a new `Blueprint`.
+3. Connect the repository.
+4. Render reads `render.yaml` and provisions the web service.
+
+### Current Render configuration
+
+- Runtime: `node`
+- Build command: `npm install`
+- Start command: `npm start`
+- Health check path: `/healthz`
+- Region: `virginia`
+- Plan: `free`
+
+### Manual CLI deploy
+
+Once the Render CLI is logged in and the workspace is set:
+
+```bash
+render deploys create srv-d77c5f94tr6s739h6jmg --commit <git-sha> --wait
+```
+
+## Persistence Note
+
+On Render free instances, local file storage is ephemeral. That means:
+
+- vote data can reset after a restart or redeploy
+- the site itself is fine for class demo and presentation
+- persistent voting would require external storage or a persistent disk
+
+## License / Usage
+
+This repository is a course project and presentation artifact for CS6730.
