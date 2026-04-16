@@ -1826,7 +1826,9 @@ main {
 .knockout-page .goals-filter-btn.is-active {
   background: #0d35ff;
   border-color: #0d35ff;
+  color: #ffffff;
   box-shadow: none;
+  -webkit-text-fill-color: #ffffff;
 }
 
 .knockout-page .goals-ranking__hint {
@@ -2860,10 +2862,18 @@ main {
   box-shadow: none;
 }
 
-.home-page .cta--outline {
+.home-page .cta.cta--outline {
   background: #ffffff;
   border-color: #b8d8ff;
   color: var(--apple-blue);
+  -webkit-text-fill-color: var(--apple-blue);
+}
+
+.home-page .cta.cta--outline:hover {
+  background: #f5f9ff;
+  border-color: #8fc0ff;
+  color: #0059b3;
+  -webkit-text-fill-color: #0059b3;
 }
 
 .home-page .criteria__grid article,
@@ -2968,9 +2978,19 @@ main {
   border-top: 1px solid #dddddf;
 }
 
-.home-page .site-footer .cta--ghost {
+.home-page .site-footer .cta.cta--ghost {
+  background: #ffffff;
   color: var(--apple-blue);
   border-color: #b8d8ff;
+  box-shadow: none;
+  -webkit-text-fill-color: var(--apple-blue);
+}
+
+.home-page .site-footer .cta.cta--ghost:hover {
+  background: #f5f9ff;
+  color: #0059b3;
+  border-color: #8fc0ff;
+  -webkit-text-fill-color: #0059b3;
 }
 
 .peak-page {
